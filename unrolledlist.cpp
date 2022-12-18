@@ -40,7 +40,6 @@ void searchUnrolledList(Node *n, int x){
             break;
         }
     }
-
 }
 
 int main()

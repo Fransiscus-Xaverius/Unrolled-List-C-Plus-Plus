@@ -11,7 +11,7 @@ public:
 
 class Node{
      public:
-    int numElements;
+    int numElements = 3;
     Mahasiswa array[maxElements];
     Node *next;
 };
@@ -57,16 +57,16 @@ void searchNRP(Node *n, string x){
     }
 }
 
-void addList(Node *n, Mahasiswa *x){
+void addList(Node *n, string nrp, string name, int age){
     bool kosong = false;
     while (n != NULL)
     {
         for (int i=0; i<n->numElements; i++){
             if(n->array[i].age==0){
                 kosong = true;
-                n->array[i].age = x->age;
-                n->array[i].nrp = x->nrp;
-                n->array[i].name = x->name;
+                n->array[i].age = age;
+                n->array[i].nrp = nrp;
+                n->array[i].name = name;
                 break;
             }
         }
@@ -92,13 +92,13 @@ int main()
     head->array[0].age = 20;
     head->array[0].name = "Fransiscus X";
     head->array[0].nrp = "221116955";
-    Mahasiswa * mhs = new Mahasiswa();
-    mhs->age = 19;
-    mhs->name = "a";
-    mhs->nrp = "2";
-    addList(head, mhs);
+
+    addList(head, "221115956", "x", 19);
+    addList(head, "221115957", "y", 19);
+    addList(head, "221115958", "z", 19);
 
     printUnrolledList(head);
+
 //    searchNRP(head,"221116953");
 
 }
