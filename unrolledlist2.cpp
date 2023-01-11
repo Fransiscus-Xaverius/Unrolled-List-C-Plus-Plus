@@ -10,9 +10,10 @@ public:
 };
 
 class Node{
-     public:
+    public:
     int numElements = 3;
     Mahasiswa array[maxElements];
+    Node *prev;
     Node *next;
 };
 
@@ -57,6 +58,32 @@ void searchNRP(Node *n, string x){
     }
 }
 
+void searchName(Node *n, string x){
+    bool found = false; //cek found
+    while(n!=NULL){
+        for (int i=0; i<n->numElements; i++){
+            if(n->array[i].name==x){
+                cout<<n->array[i].name; //move array
+                cout<<endl<<n->array[i].nrp;
+                cout<<endl<<n->array[i].age;
+                found = true; //ketemu
+            }
+            if(found){ //jika ketemu break
+                break;
+            }
+        }
+        if(!found){ //break lagi karena looping for merupakan looping nested
+            n = n->next;
+        }
+        if(found){
+            break;
+        }
+    }
+    if(n==NULL){
+        cout<<"Data not found";
+    }
+}
+
 void addList(Node *n, string nrp, string name, int age){
     bool kosong = false;
     while (n != NULL)
@@ -73,6 +100,7 @@ void addList(Node *n, string nrp, string name, int age){
         if(!kosong){
             if(n->next==NULL){
                 n->next = new Node();
+                n->next->prev = n;
             }
             n = n->next;
         }
@@ -80,7 +108,16 @@ void addList(Node *n, string nrp, string name, int age){
             break;
         }
     }
+}
 
+void deleteAll(Node *n){
+    while (n != NULL)
+    {
+        n = n->next;
+        int *ptr = &n->prev;
+        cout<<ptr;
+        delete n->prev;
+    }
 }
 
 int main()
@@ -203,6 +240,8 @@ int main()
     addList(head, "221117054", "u2zgM" ,19);
     addList(head, "221117055", "gJCnZ" ,19);
 
-    searchNRP(head,"221116995");
+    deleteAll(head);
+
+    printUnrolledList(head);
 
 }
